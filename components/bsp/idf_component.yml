@@ -1,0 +1,10 @@
+# SPDX-License-Identifier: MIT
+dependencies:
+  espressif/esp_io_expander_tca95xx_16bit:
+    version: "^2"
+  espressif/button:
+    version: "^4"
+  espressif/esp_lcd_touch:
+    version: "^1"
+  espressif/esp_lcd_touch_ft5x06:
+    version: "^1"

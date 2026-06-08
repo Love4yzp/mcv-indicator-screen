@@ -1,0 +1,74 @@
+menu "SenseCAP Indicator"
+
+    config INDICATOR_LORAWAN_ENABLED
+        bool "Enable LoRaWAN (SX1262)"
+        default n
+        help
+            Enable LoRaWAN support for D1L / D1Pro models with SX1262 radio.
+            Uses RadioLib for LoRaWAN MAC (Class A / Class C).
+            Disable for D1 / D1S models (no LoRa hardware).
+
+    menu "LoRaWAN Configuration"
+        depends on INDICATOR_LORAWAN_ENABLED
+
+        choice LORAWAN_REGION
+            prompt "LoRaWAN Region"
+            default LORAWAN_REGION_EU868
+
+            config LORAWAN_REGION_EU868
+                bool "EU868"
+            config LORAWAN_REGION_US915
+                bool "US915"
+            config LORAWAN_REGION_CN470
+                bool "CN470"
+            config LORAWAN_REGION_AS923
+                bool "AS923"
+            config LORAWAN_REGION_AU915
+                bool "AU915"
+        endchoice
+
+        config LORAWAN_DEV_EUI
+            string "Device EUI (16 hex chars)"
+            default "0000000000000000"
+            help
+                8-byte Device EUI in hex. Obtain from your LoRaWAN network server.
+
+        config LORAWAN_JOIN_EUI
+            string "Join EUI / App EUI (16 hex chars)"
+            default "0000000000000000"
+            help
+                8-byte Join EUI (formerly App EUI) in hex.
+
+        config LORAWAN_APP_KEY
+            string "Application Key (32 hex chars)"
+            default "00000000000000000000000000000000"
+            help
+                16-byte Application Key in hex for OTAA.
+
+        config LORAWAN_NWK_KEY
+            string "Network Key (32 hex chars)"
+            default "00000000000000000000000000000000"
+            help
+                16-byte Network Key in hex (LoRaWAN 1.1). Same as App Key for 1.0.x.
+
+        choice LORAWAN_CLASS
+            prompt "LoRaWAN Device Class"
+            default LORAWAN_CLASS_C
+
+            config LORAWAN_CLASS_A
+                bool "Class A (lowest power)"
+            config LORAWAN_CLASS_C
+                bool "Class C (continuous RX)"
+        endchoice
+
+        config LORAWAN_SUBBAND
+            int "Sub-band (0 = all, 1-8 for US915/AU915)"
+            default 0
+            range 0 8
+            help
+                Sub-band selection for US915 / AU915 regions.
+                0 = use all channels. 1-8 = restrict to specific sub-band.
+
+    endmenu
+
+endmenu

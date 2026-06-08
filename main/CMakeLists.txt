@@ -1,0 +1,40 @@
+# SPDX-License-Identifier: MIT
+
+idf_component_register(
+    SRCS
+        "main.c"
+        "lv_port.c"
+        "app/app_manager.c"
+        "app/app_inspect.c"
+        "app/pages/page_sensor.c"
+        "app/pages/page_hello.c"
+        "app/pages/page_control.c"
+        "app/pages/page_settings.c"
+        "app/services/svc_storage.c"
+        "app/services/svc_alerts.c"
+        "app/services/svc_wifi.c"
+        "app/services/svc_ha_mqtt.c"
+        "app/services/svc_console.c"
+        "app/services/svc_rp2040.c"
+        "app/services/svc_lorawan.cpp"
+        "app/pages/page_lora.c"
+        "app/fonts/app_fonts.c"
+        "app/fonts/font_unit_14.c"
+        "app/fonts/font_unit_32.c"
+        "app/fonts/font_cn_14.c"
+        "app/fonts/font_cn_20.c"
+    INCLUDE_DIRS "." "app" "app/pages" "app/services"
+    REQUIRES
+        bsp
+        cobs
+        esp_lvgl_port
+        lvgl
+        esp_wifi
+        esp_netif
+        nvs_flash
+        esp_event
+        lwip
+        wifi_provisioning
+        mqtt
+        console
+)
